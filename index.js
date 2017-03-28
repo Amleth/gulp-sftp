@@ -281,7 +281,7 @@ module.exports = function (options) {
                 var highWaterMark = stream.highWaterMark||(16*1000);
                 var size = file.stat.size;
 
-
+                if (options.hasOwnProperty('onFileUploadStarted') && (typeof options.onFileUploadStarted === 'function')) options.onFileUploadStarted(finalRemotePath);
                 file.pipe(stream); // start upload
 
                 stream.on('drain',function(){
