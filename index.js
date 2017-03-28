@@ -165,6 +165,7 @@ module.exports = function (options) {
                 gutil.log('Connection :: close, ', gutil.colors.red('Error: ' + err));
             } else {
                 gutil.log('Connection :: closed');
+                if (options.hasOwnProperty('onConnectionClosed') && (typeof options.onConnectionClosed === 'function')) options.onConnectionClosed();
             }
             
         });
@@ -303,6 +304,7 @@ module.exports = function (options) {
                                 file.relative +
                                 gutil.colors.green(' => ') +
                                 finalRemotePath);
+                            if (options.hasOwnProperty('onFileUploaded') && (typeof options.onFileUploaded === 'function')) options.onFileUploaded(finalRemotePath);
                         }
 
                         fileCount++;
